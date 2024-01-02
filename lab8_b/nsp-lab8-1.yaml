@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab81
+  labels:
+    name: lab81
+...
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+  namespace: default
+  labels: 
+    app: server
+spec:
+  containers:
+  - name: nginx81
+    image: nginx
+...
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleepy
+  namespace: lab81
+  labels:
+    app: sleepy
+spec:
+  containers:
+  - name: busybox81
+    image: busybox
+    command:
+    - sleep
+    - "3600"

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: emptydir-pod
+spec:
+  containers:
+  - name: black
+    image: ubuntu
+    command:
+      - sleep
+      - "3600" 
+    volumeMounts:
+      - mountPath: /magazyn1
+        name: shared-emptydir
+  - name: white
+    image: ubuntu
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+      - mountPath: /magazyn2
+        name: shared-emptydir
+  volumes: 
+  - name: shared-emptydir
+    emptyDir: 
+      sizeLimit: 700Mi

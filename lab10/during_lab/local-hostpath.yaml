@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: hostpath-pod
+spec:
+  containers:
+  - name: good
+    image: ubuntu
+    command:
+      - sleep
+      - "3600" 
+    volumeMounts:
+    - mountPath: /storage1
+      name: shared-hostpath
+  - name: bad
+    image: ubuntu
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - mountPath: /storage2
+      name: shared-hostpath
+  volumes: 
+  - name: shared-hostpath
+    hostPath: 
+      path: /magazyn
+      type: DirectoryOrCreate
